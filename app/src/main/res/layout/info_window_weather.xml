@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="weatherInfo"
+            type="com.kaplan.weatherapp.model.WeatherResponse" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="16dp"
+        android:clipToPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{weatherInfo.name}"
+            android:textStyle="bold"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/city"
+            android:paddingTop="16dp"
+            android:textSize="20sp"
+            temperature="@{weatherInfo.main.temp}"/>
+
+        <TextView
+            android:id="@+id/weatherDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            android:paddingTop="16dp"
+            android:textSize="20sp"
+            android:textAllCaps="true"
+            android:text="@{weatherInfo.weather.get(0).description}"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/weatherDesc"
+            app:layout_constraintTop_toTopOf="@id/weatherDesc"
+            app:layout_constraintBottom_toBottomOf="@id/weatherDesc"
+            load="@{weatherInfo.weather.get(0).icon}"/>
+
+
+        <TextView
+            android:id="@+id/windSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingTop="16dp"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/weatherDesc"
+            wind="@{weatherInfo.wind.speed}"/>
+
+        <TextView
+            android:id="@+id/humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/windSpeed"
+            humidity="@{weatherInfo.main.humidity}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
